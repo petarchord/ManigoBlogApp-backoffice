@@ -16,18 +16,21 @@ client
   .finally(() => client.end());
 
 const getAtricles = (req, res) => {
-  client.query("SELECT * FROM article ORDER BY id ASC", (err, result) => {
-    if (err) throw err;
+  client.query(
+    "SELECT title , content , comment_text  , username FROM article,user,comment;",
+    (err, result) => {
+      if (err) throw err;
 
-    res.status(200).json(result.rows);
-  });
+      res.status(200).json(result.rows);
+    }
+  );
 };
 
 const publishArticle = (req, res) => {
   const { userid, title, content } = req.body;
 
   client.query(
-    "INSERT INTO article (title,content,userid) VALUES ($1, $2)",
+    "INSERT INTO article (title,content,userid) VALUES ($1, $2 , $3)",
     [title, content, userid],
     (err, result) => {
       if (err) throw err;

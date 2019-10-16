@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const db = require("./queries");
-const port = 3000;
+const port = 3001;
 const app = express();
 
 app.use(bodyParser.json());
